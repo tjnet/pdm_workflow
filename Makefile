@@ -19,9 +19,10 @@ $(TARGET_FILES): %: %.sample
 install-dependencies:
 	npm install -g @marp-team/marp-cli
 
-# Run the presentation with watch mode
-watch-presentation:
-	marp --watch knowledge/presentation.md
+# Convert presentation to PDF
+pdf-presentation:
+	@echo "Converting presentation to PDF..."
+	marp knowledge/presentation/presentation.md --pdf --output tmp/presentation.pdf
 
 # Help
 .PHONY: help
@@ -29,5 +30,5 @@ help:
 	@echo "Available targets:"
 	@echo "  create-knowledge-files - Create all knowledge files from samples (default)"
 	@echo "  install-dependencies  - Install necessary dependencies"
-	@echo "  watch-presentation    - Run the presentation with watch mode"
+	@echo "  pdf-presentation      - Convert presentation to PDF in tmp directory"
 	@echo "  help                  - Show this help message"
