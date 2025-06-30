@@ -1,19 +1,17 @@
-  
-<!--
-  currently, just using perplexity seems better
--->
 <workflow>
-- On each session, automatically:
-  1. Fetch about 10 news or useful articles.
-  2. They should be based on our industry keywords, tech stack, or general product management. Please gather information from the fields of UI/UX, business, and technology so that you are not biased toward any one area.
-  3.Could you directly access to the medium, dev.to, b.hatena.ne.jp and google search engine instead of executing some script. Instead of specifying the KEYWORD directly, we would like you to guess and retrieve news that we might be interested in. Outdated / expired link should not be included in the results. Please ensure that article is not almost empty one and still contains actual content that is worth reading. Following things like below should be excluded from the results.
-    e.g. The page you're finding not found.
-    e.g. The page you accessed to were deleted or url was changed.
-  4. Format the output as:
-     ```
-     YYYY‑MM‑DD HH:MM:SS | Title: <article title>
-     URL: <article URL>
-     ```
-  5. Print results to standard output (stdout) and the file. URL should be clickable.
-  file name (file path) should be tmp/<YYYY-MM-DD_HH_MM_SS>_news.md.
+- On each session, AI must automatically generate and save the output file using the current date and time (e.g., tmp/YYYY-MM-DD_HH_MM_SS_news.md), without waiting for user instructions.
+- Collect 10 news items or useful articles.
+  - By using `@web` feature, I'm assuming that you can fetch the news. 
+  - Select keywords for news gathering based on the rules defined in .cursorrules, ensuring coverage of relevant domains.
+  - Exclude outdated, broken-link, advertisement, job posting, or low-content articles.
+  - For each candidate URL, check:
+    - The link returns HTTP 200 (OK) status.
+    - The page is not a 404, expired, or deleted page.
+    - The article has sufficient content (not just a title or a few words).
+  - Prefer official media, reputable tech blogs, and well-maintained platforms (e.g., Zenn, Dev.to, EdTechZine, official releases).
+- Output each article in the following format:
+  YYYY‑MM‑DD HH:MM:SS | Title: <article title>
+  URL: <article URL>
+- Print the results to standard output and save them to a file (using the naming rule above).
+- Use the system time to generate the file name (e.g., date '+%Y-%m-%d_%H_%M_%S').
 </workflow>
